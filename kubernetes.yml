@@ -1,0 +1,20 @@
+---
+
+- name: Prepare machines for k8s cluster
+  hosts: all
+  become: yes
+
+  roles:
+    - common/dependencies
+    - common/configure
+
+###
+- name: Create kubernetes cluster
+  hosts: master_group
+  become: yes
+
+  roles:
+    - master/k8s_tools
+    - master/create_cluster
+    - master/deploy_weave
+

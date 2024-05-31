@@ -1,0 +1,25 @@
+---
+
+- name: Download and prepare KubeEdge binary on machines
+  hosts: all
+  become: yes
+
+  roles:
+    - common/kubeedge_binary
+
+###
+- name: Create and configure Cloud Core
+  hosts: master_group
+  become: yes
+
+  roles:
+    - master/cloud_core
+
+###
+- name: Create and configure Edge Core
+  hosts: worker_group
+  become: yes
+
+  roles:
+    - worker/edge_core
+
